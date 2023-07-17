@@ -24,8 +24,10 @@ func TestGetDateFormat(t *testing.T) {
 
 // 时间相减
 func TestDateSub(t *testing.T) {
-	maxDate := "2023-07-03 18:30:03.555"
-	minDate := "2023-07-03 17:20:02.111"
+	maxDate := "2023-07-03 18:30:03"
+	minDate := "2023-07-03 17:20:02"
 	rst, _ := src.DateSub(maxDate, minDate)
-	fmt.Printf("rst: T:%T, v:%+v \n", rst, rst)
+	rst2, _ := src.DateSub2(maxDate, minDate)
+	fmt.Printf("rst.Desc: T:%T, v:%+v \n", rst.Desc, rst.Desc)
+	fmt.Printf("rst2: T:%T, v:%+v \n", rst2, rst2)
 }

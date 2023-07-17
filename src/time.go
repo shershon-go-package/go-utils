@@ -1,6 +1,7 @@
 package src
 
 import (
+	"fmt"
 	"github.com/cockroachdb/errors"
 	"strconv"
 	"strings"
@@ -53,7 +54,7 @@ func DateSub(maxTime, minTime string) (CompareDateResult, error) {
 	if err != nil {
 		return result, err
 	}
-	// diff = 1h10m1.444s
+	// diff = 1h10m1s
 	result.TotalSecond = maxDate.Sub(minDate).Seconds()
 	diff := maxDate.Sub(minDate).String()
 	fieldsFunc := strings.FieldsFunc(diff, func(r rune) bool {
@@ -76,6 +77,31 @@ func DateSub(maxTime, minTime string) (CompareDateResult, error) {
 		result.Second = second
 	}
 	return result, nil
+}
+
+/**
+ * DateSub2
+ * @Description: 时间相减
+ * @Author: Shershon
+ * @Param maxTime
+ * @Param minTime
+ * @Return string XX时XX分XX秒
+ * @Return error
+ * @Date 2023-07-17 10:15:15
+ **/
+func DateSub2(maxTime, minTime string) (string, error) {
+	// 将两个时间类型转换成 time.Time 类型
+	maxDate, minDate, err := parseCompareTime(maxTime, minTime)
+	if err != nil {
+		return "", err
+	}
+	// 计算两个时间相差的时分秒
+	diff := maxDate.Sub(minDate)
+	hours := int(diff.Hours())
+	minutes := int(diff.Minutes()) - hours*60
+	seconds := int(diff.Seconds()) - hours*3600 - minutes*60
+
+	return fmt.Sprintf("%d小时%d分%d秒", hours, minutes, seconds), nil
 }
 
 /**
