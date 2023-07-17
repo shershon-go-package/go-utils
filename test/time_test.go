@@ -24,10 +24,31 @@ func TestGetDateFormat(t *testing.T) {
 
 // 时间相减
 func TestDateSub(t *testing.T) {
-	maxDate := "2023-07-03 18:30:03"
-	minDate := "2023-07-03 17:20:02"
-	rst, _ := src.DateSub(maxDate, minDate)
-	rst2, _ := src.DateSub2(maxDate, minDate)
+	maxDate := "2023-07-17 18:58:44"
+	minDate := "2023-07-13 14:55:26"
+	rst, _ := src.DateSub(maxDate, minDate)   // 返回包含类似 1h10m10s 字段的结构体
+	rst2, _ := src.DateSub2(maxDate, minDate) // 返回 XX时XX分XX秒 格式的字符串
 	fmt.Printf("rst.Desc: T:%T, v:%+v \n", rst.Desc, rst.Desc)
+	fmt.Printf("rst2: T:%T, v:%+v \n", rst2, rst2)
+}
+
+// 判断时间差是否满足 >= day
+func TestDurationGEDay(t *testing.T) {
+	maxDate := "2023-07-17 18:58:44"
+	minDate := "2023-07-15 14:55:26"
+	rst, _ := src.IsDiffDay(maxDate, minDate, 3)
+	fmt.Printf("rst: T:%T, v:%+v \n", rst, rst)
+}
+
+// 字符串时间格式化
+func TestFormatLocalStrDate(t *testing.T) {
+	date := "2023-07-17 19:31:30"
+	format := "2006-01-02 15:04"
+	rst, _ := src.FormatLocalStrDate(date, format)
+	fmt.Printf("rst: T:%T, v:%+v \n", rst, rst)
+
+	date2 := "2023-07-17"
+	format2 := "2006-01-02 15:04:05"
+	rst2, _ := src.FormatLocalStrDate(date2, format2)
 	fmt.Printf("rst2: T:%T, v:%+v \n", rst2, rst2)
 }
