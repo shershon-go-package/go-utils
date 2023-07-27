@@ -52,3 +52,9 @@ func TestFormatLocalStrDate(t *testing.T) {
 	rst2, _ := src.FormatLocalStrDate(date2, format2)
 	fmt.Printf("rst2: T:%T, v:%+v \n", rst2, rst2)
 }
+
+// 输出日期之间的所有日期（按天切分日期）
+func TestSplidDate(t *testing.T) {
+	rst := src.SplitDate("2023-07-01", "2023-07-31", "2006-01-02")
+	fmt.Println(rst)
+}

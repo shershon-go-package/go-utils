@@ -5,6 +5,7 @@ import (
 	"github.com/cockroachdb/errors"
 	"strconv"
 	"strings"
+	"time"
 )
 
 /**
@@ -68,4 +69,30 @@ func Split2Int64(ctx context.Context, data, sep string) ([]int64, error) {
 		result = append(result, parseInt)
 	}
 	return result, nil
+}
+
+/**
+ * SplitDate
+ * @Description: 输出日期之间的所有日期（按天切分日期）
+ * @Author: Shershon
+ * @Param beginDate
+ * @Param endDate
+ * @Param format
+ * @Return []string
+ * @Date 2023-07-27 14:56:37
+ **/
+func SplitDate(beginDate, endDate, format string) []string {
+	bDate, _ := time.ParseInLocation(format, beginDate, time.Local)
+	eDate, _ := time.ParseInLocation(format, endDate, time.Local)
+
+	dlist := make([]string, 0)
+	dlist = append(dlist, beginDate)
+	day := int(eDate.Sub(bDate).Hours() / 24)
+	for i := 1; i < day; i++ {
+		result := bDate.AddDate(0, 0, i)
+		dlist = append(dlist, result.Format(format))
+	}
+	dlist = append(dlist, endDate)
+
+	return dlist
 }
