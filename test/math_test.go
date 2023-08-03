@@ -8,8 +8,10 @@ package test
 
 import (
 	"fmt"
+	"math/rand"
 	"shershon1991/go-utils/src"
 	"testing"
+	"time"
 )
 
 // 保留小数位(四舍五入)
@@ -34,8 +36,20 @@ func TestRoundString(t *testing.T) {
 
 // 生成固定位数的随机数
 func TestGenerateFixedDigitRandom(t *testing.T) {
-	rst := src.GenerateFixedDigitRandom(6)
-	rst2 := src.GenerateFixedDigitRandom(10)
-	fmt.Printf("rst T:%T, v:%v \n", rst, rst)
-	fmt.Printf("rst2 T:%T, v:%v \n", rst2, rst2)
+	//设置随机数种子为当前时间的纳秒数
+	rand.Seed(time.Now().UnixNano())
+
+	max := int64(1)
+	min := int64(1)
+	digits := 6
+	for i := 0; i < digits; i++ {
+		max *= 10
+	}
+	for i := 0; i < digits-1; i++ {
+		min *= 10
+	}
+
+	for i := 0; i < 100; i++ {
+		fmt.Printf("rst T:%T, v:%v \n", rand.Int63n(max-min)+min, rand.Int63n(max-min)+min)
+	}
 }
