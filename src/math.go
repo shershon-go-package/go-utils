@@ -2,7 +2,9 @@ package src
 
 import (
 	"math"
+	"math/rand"
 	"strconv"
+	"time"
 )
 
 /**
@@ -35,4 +37,28 @@ func Round(num float64, decimal int) float64 {
 func RoundString(num float64, decimal int) string {
 	f := Round(num, decimal)
 	return strconv.FormatFloat(f, 'f', decimal, 64)
+}
+
+/**
+ * GenerateFixedDigitRandom
+ * @Description: 生成固定位数的随机数
+ * @Author: Shershon
+ * @Param digits
+ * @Return int64
+ * @Date 2023-08-03 11:29:21
+ **/
+func GenerateFixedDigitRandom(digits int) int64 {
+	//设置随机数种子为当前时间的纳秒数
+	rand.Seed(time.Now().UnixNano())
+
+	max := int64(1)
+	min := int64(1)
+	for i := 0; i < digits; i++ {
+		max *= 10
+	}
+	for i := 0; i < digits-1; i++ {
+		min *= 10
+	}
+
+	return rand.Int63n(max-min) + min
 }
