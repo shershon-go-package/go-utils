@@ -58,3 +58,28 @@ func TestSplidDate(t *testing.T) {
 	rst := src.SplitDate("2023-07-01", "2023-07-31", "2006-01-02")
 	fmt.Println(rst)
 }
+
+// 比较两个时间字符串的大小
+func TestCompareTime(t *testing.T) {
+	time1 := "2023-09-01 00:00:00"
+	time2 := "2023-09-01 12:00:00"
+	rst, _ := src.CompareTime(time1, time2)
+	if rst > 0 {
+		fmt.Println("time1 > time2")
+	} else if rst == 0 {
+		fmt.Println("time1 = time2")
+	} else {
+		fmt.Println("time1 < time2")
+	}
+
+	time11 := "2023-09-02 00:00:00"
+	time22 := "2023-09-01 12:00:00"
+	rst2, _ := src.CompareTime(time11, time22)
+	if rst2 > 0 {
+		fmt.Println("time11 > time22")
+	} else if rst2 == 0 {
+		fmt.Println("time11 = time22")
+	} else {
+		fmt.Println("time11 < time22")
+	}
+}

@@ -40,7 +40,7 @@ func GetDateFormat(date string) string {
 
 /**
  * DateSub
- * @Description: 时间相减
+ * @Description: 计算两个日期时间相差的时间，并格式化
  * @Author: Shershon
  * @Param maxTime
  * @Param minTime
@@ -81,7 +81,7 @@ func DateSub(maxTime, minTime string) (CompareDateResult, error) {
 
 /**
  * DateSub2
- * @Description: 时间相减
+ * @Description: 计算两个日期时间相差的时间，并格式化
  * @Author: Shershon
  * @Param maxTime
  * @Param minTime
@@ -172,4 +172,39 @@ func FormatLocalStrDate(date string, format string) (string, error) {
 	}
 	retDate := location.Format(format)
 	return retDate, nil
+}
+
+/**
+ * CompareTime
+ * @Description: 比较两个时间字符串的大小
+ * @Author: Shershon
+ * @Param time1
+ * @Param time2
+ * @Return int 1：time1>tim2 0:time1=tim2 -1:time1<time2
+ * @Return error
+ * @Date 2023-08-29 11:25:29
+ **/
+func CompareTime(time1, time2 string) (int, error) {
+	date1, err1 := time.ParseInLocation(GetDateFormat(time1), time1, time.Local)
+	date2, err2 := time.ParseInLocation(GetDateFormat(time2), time2, time.Local)
+	if err1 != nil || err2 != nil {
+		return 0, errors.New("时间解析失败")
+	}
+	// 方法1：转换成时间戳进行比较
+	if date1.Unix() > date2.Unix() {
+		return 1, nil
+	} else if date1.Unix() == date2.Unix() {
+		return 0, nil
+	} else {
+		return -1, nil
+	}
+	// 方法2：使用Sub函数
+	/*diff := date1.Sub(date2)
+	if diff > 0 {
+		return 1, nil
+	} else if diff == 0 {
+		return 0, nil
+	} else {
+		return -1, nil
+	}*/
 }
