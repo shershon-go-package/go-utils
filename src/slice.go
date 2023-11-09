@@ -9,7 +9,7 @@ import (
 )
 
 /**
- * SliceInt64Join
+ * Int64SliceJoin
  * @Description: int64切片拼接
  * @Author: Shershon
  * @Param ctx
@@ -18,7 +18,7 @@ import (
  * @Return string
  * @Date 2023-07-03 17:41:25
  **/
-func SliceInt64Join(ctx context.Context, data []int64, sep string) string {
+func Int64SliceJoin(ctx context.Context, data []int64, sep string) string {
 	var strSlice []string
 	for _, datum := range data {
 		strSlice = append(strSlice, strconv.FormatInt(datum, 10))
@@ -27,7 +27,7 @@ func SliceInt64Join(ctx context.Context, data []int64, sep string) string {
 }
 
 /**
- * SliceIntJoin
+ * IntSliceJoin
  * @Description: int切片拼接
  * @Author: Shershon
  * @Param ctx
@@ -36,7 +36,7 @@ func SliceInt64Join(ctx context.Context, data []int64, sep string) string {
  * @Return string
  * @Date 2023-07-03 17:41:30
  **/
-func SliceIntJoin(ctx context.Context, data []int, sep string) string {
+func IntSliceJoin(ctx context.Context, data []int, sep string) string {
 	var strSlice []string
 	for _, datum := range data {
 		strSlice = append(strSlice, strconv.Itoa(datum))
@@ -45,7 +45,7 @@ func SliceIntJoin(ctx context.Context, data []int, sep string) string {
 }
 
 /**
- * Split2Int64
+ * Split2Int64Slice
  * @Description: 切割字符串，转成[]int64
  * @Author: Shershon
  * @Param ctx
@@ -55,7 +55,7 @@ func SliceIntJoin(ctx context.Context, data []int, sep string) string {
  * @Return error
  * @Date 2023-07-03 17:41:36
  **/
-func Split2Int64(ctx context.Context, data, sep string) ([]int64, error) {
+func Split2Int64Slice(ctx context.Context, data, sep string) ([]int64, error) {
 	var result []int64
 	split := strings.Split(data, sep)
 	if len(split) == 0 {
