@@ -83,3 +83,8 @@ func TestCompareTime(t *testing.T) {
 		fmt.Println("time11 < time22")
 	}
 }
+
+// 计算程序的耗时
+func TestTimeUse(t *testing.T) {
+	src.ComputeTimeUse()
+}

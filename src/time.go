@@ -208,3 +208,18 @@ func CompareTime(time1, time2 string) (int, error) {
 		return -1, nil
 	}*/
 }
+
+/**
+ * ComputeTimeUse
+ * @Description: 计算程序的耗时
+ * @Author: Shershon
+ * @Date 2024-07-17 19:10:04
+ **/
+func ComputeTimeUse() {
+	now := time.Now()
+
+	// 模拟程序计算
+	time.Sleep(10 * time.Second)
+
+	fmt.Printf("time use: %s\n", time.Since(now).String())
+}
